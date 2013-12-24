@@ -19,6 +19,7 @@ package {
 		private var hVelocity:Number = 0;
 		private var vVelocity:Number = 0;
 		
+		private var weapon:Weapon;
 		private var fireRate:Number = 0.1;
 		private var fireWait:Number = fireRate;
 		
@@ -57,9 +58,23 @@ package {
 			tintTween.tween(spriteMap, "tinting", 0.8, 0.3);
 			tintTween.active = false;
 			addTween(tintTween);
+			
+			this.weapon = Weapon.create(this, 12, 7);
+			this.weapon.setFireCondition(fireCondition);
+			this.weapon.setReleaseCondition(releaseFireCondition);
+			FP.world.add(this.weapon); //Assuming current world
+		}
+		
+		private function fireCondition():Boolean {
+			return Input.check(Key.SPACE);
+		}
+		
+		private function releaseFireCondition():Boolean {
+			return Input.released(Key.SPACE);
 		}
 		
 		override public function update():void {
+			
 			if (Input.pressed("left")) {
 				hVelocity = -speed;
 			}
@@ -93,22 +108,11 @@ package {
 			
 			FP.clampInRect(this, 0, 0, FP.width - this.width, FP.height - this.height);
 			
-			if (Input.check(Key.SPACE)) {
-				//shoot.play(0.1, 1);
-				fireWait += FP.elapsed;
-				if (fireWait > fireRate) {
-					fireWait -= fireRate;
-					this.world.add(Bullet.create(this));					
-				}
-			} else if (Input.released(Key.SPACE)) {
-				fireWait = fireRate;
-			}
-			
 			// Assign the collided Bullet Entity to a temporary var.
 			var bulletCollision:Bullet = collideOnLayer("bullet", x, y) as Bullet;
 
 			// Check if b has a value (true if a Bullet was collided with).
-			if (bulletCollision && !bulletCollision.isShooter(this)) {
+			if (bulletCollision && !bulletCollision.isOwner(this)) {
 				bulletCollision.destroy();
 			}
 		}

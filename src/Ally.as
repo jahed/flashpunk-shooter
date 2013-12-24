@@ -15,16 +15,16 @@ package {
 		private var shoot:Sfx;
 		
 		private var speed:Number = 100 + Math.random() * 50;
-		private var hVelocity:Number = 0;
-		private var vVelocity:Number = 0;
 		private var playerDistance:Number = 50;
 		
+		private var weapon:Weapon;
 		private var fireRate:Number = 0.1;
 		private var fireWait:Number = fireRate;
 		
 		private var player:Player;
 		private var anchorX:Number;
 		private var anchorY:Number;
+		
 		
 		public function Ally(player:Player, anchorX:Number, anchorY:Number) {
 			name = "ally";
@@ -46,6 +46,24 @@ package {
 			shoot = new Sfx(SHOOT);
 			
 			this.layer = 5;
+			this.weapon = Weapon.create(this, 4, 4);
+			this.weapon.setFireCondition(fireCondition);
+			this.weapon.setReleaseCondition(releaseFireCondition);
+			FP.world.add(this.weapon); //Assuming current world
+		}
+		
+		private function fireCondition():Boolean {
+			return Input.mouseDown && !chargeCondition();
+		}
+		
+		private function releaseFireCondition():Boolean {
+			return Input.mouseReleased;
+		}
+		
+		private function chargeCondition():Boolean {
+			return Input.mousePressed && player.collidePoint(
+				player.x, player.y, Input.mouseX, Input.mouseY
+			);
 		}
 		
 		override public function update():void {
@@ -55,27 +73,15 @@ package {
 				speed * FP.elapsed
 			);
 			
-			if (Input.mouseDown) {
-				if (Input.mousePressed && player.collidePoint(player.x, player.y, Input.mouseX, Input.mouseY)) {
-					player.flash();
-				} else {
-					fireWait += FP.elapsed;
-					if (fireWait > fireRate) {
-						fireWait -= fireRate;
-						this.world.add(Bullet.create(this));					
-					}	
-				}
-				
-			} else if (Input.mouseReleased) {
-				fireWait = fireRate;
+			if (chargeCondition()) {
+				player.flash();
 			}
-			
 			
 			// Assign the collided Bullet Entity to a temporary var.
 			var bulletCollision:Bullet = collideOnLayer("bullet", x, y) as Bullet;
 
 			// Check if b has a value (true if a Bullet was collided with).
-			if (bulletCollision && !bulletCollision.isShooter(this)) {
+			if (bulletCollision && !bulletCollision.isOwner(this)) {
 				bulletCollision.destroy();
 			}
 		}
