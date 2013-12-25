@@ -10,7 +10,6 @@ package {
 
 	public class Player extends Entity {
 		[Embed(source = 'assets/player.png')] private const PLAYER:Class;
-		[Embed(source = "assets/konami.mp3")] private const SHOOT:Class;
 		
 		private var spriteMap:Spritemap;
 		private var shoot:Sfx;
@@ -38,9 +37,6 @@ package {
 			spriteMap.tinting = 0;
 			this.addGraphic(spriteMap);
 			setHitbox(16, 18, -7, -6);
-			this.centerOrigin();
-
-			shoot = new Sfx(SHOOT);
 
 			Input.define("up", Key.W, Key.UP);
 			Input.define("down", Key.S, Key.DOWN);

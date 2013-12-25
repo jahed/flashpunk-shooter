@@ -2,8 +2,12 @@ package {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
+	import net.flashpunk.Sfx;
+	import net.flashpunk.tweens.misc.VarTween;
 
 	public class Weapon extends Entity {
+		[Embed(source="assets/shoot.mp3")] private const SHOOT:Class;
+		private var shoot:Sfx;
 		
 		protected var owner:Entity;
 		private var relativeX:Number;
@@ -18,6 +22,8 @@ package {
 			name = "weapon";
 			type = "weapon";
 			this.collidable = false;
+			
+			shoot = new Sfx(SHOOT);
 		}
 		
 		public function init(owner:Entity, relativeX:Number, relativeY:Number):Weapon {
@@ -52,6 +58,7 @@ package {
 		public function fire():void {
 			var bullet:Bullet = FP.world.create(Bullet) as Bullet;
 			bullet.init(this);
+			shoot.play(1 / (this.layer*this.layer + 1));
 		}
 		
 		override public function update():void {

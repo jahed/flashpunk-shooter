@@ -9,10 +9,8 @@ package {
 
 	public class Ally extends Entity {
 		[Embed(source = 'assets/ally.png')] private const ALLY:Class;
-		[Embed(source = "assets/konami.mp3")] private const SHOOT:Class;
 		
 		private var spriteMap:Spritemap;
-		private var shoot:Sfx;
 		
 		private var speed:Number = 100 + Math.random() * 50;
 		private var playerDistance:Number = 50;
@@ -42,8 +40,6 @@ package {
 			
 			this.addGraphic(spriteMap);
 			setHitbox(18*spriteMap.scale, 23*spriteMap.scale, -6*spriteMap.scale, -4*spriteMap.scale);
-
-			shoot = new Sfx(SHOOT);
 			
 			this.layer = 5;
 			
