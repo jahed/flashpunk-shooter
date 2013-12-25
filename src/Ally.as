@@ -35,7 +35,7 @@ package {
 			spriteMap = new Spritemap(ALLY, 32, 32);
 				spriteMap.smooth = false;
 				spriteMap.scale = 0.5;
-				spriteMap.color = 0x000000;
+				spriteMap.color = 0x0000AA;
 				spriteMap.tinting = 0.3;
 				spriteMap.add("normal", [0, 1], 30, true);
 			spriteMap.play("normal");
@@ -46,10 +46,11 @@ package {
 			shoot = new Sfx(SHOOT);
 			
 			this.layer = 5;
-			this.weapon = Weapon.create(this, 4, 4);
+			
+			this.weapon = FP.world.create(Weapon) as Weapon;
+			this.weapon.init(this, 4, 4);
 			this.weapon.setFireCondition(fireCondition);
 			this.weapon.setReleaseCondition(releaseFireCondition);
-			FP.world.add(this.weapon); //Assuming current world
 		}
 		
 		private function fireCondition():Boolean {
@@ -77,10 +78,8 @@ package {
 				player.flash();
 			}
 			
-			// Assign the collided Bullet Entity to a temporary var.
 			var bulletCollision:Bullet = collideOnLayer("bullet", x, y) as Bullet;
 
-			// Check if b has a value (true if a Bullet was collided with).
 			if (bulletCollision && !bulletCollision.isOwner(this)) {
 				bulletCollision.destroy();
 			}

@@ -59,10 +59,10 @@ package {
 			tintTween.active = false;
 			addTween(tintTween);
 			
-			this.weapon = Weapon.create(this, 12, 7);
+			this.weapon = FP.world.create(Weapon) as Weapon;
+			this.weapon.init(this, 12, 7);
 			this.weapon.setFireCondition(fireCondition);
 			this.weapon.setReleaseCondition(releaseFireCondition);
-			FP.world.add(this.weapon); //Assuming current world
 		}
 		
 		private function fireCondition():Boolean {
@@ -108,10 +108,8 @@ package {
 			
 			FP.clampInRect(this, 0, 0, FP.width - this.width, FP.height - this.height);
 			
-			// Assign the collided Bullet Entity to a temporary var.
 			var bulletCollision:Bullet = collideOnLayer("bullet", x, y) as Bullet;
 
-			// Check if b has a value (true if a Bullet was collided with).
 			if (bulletCollision && !bulletCollision.isOwner(this)) {
 				bulletCollision.destroy();
 			}
