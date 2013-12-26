@@ -82,8 +82,13 @@ package {
 		}
 		
 		public function collideOnLayer(type:String, x:Number, y:Number):Entity {
-			var entity:Entity = collide(type, x, y);
-			if (entity && entity.layer == this.layer) return entity;
+			var collisions:Array = [];
+			this.collideInto(type, x, y, collisions);
+			for (var index:String in collisions) {
+				if (collisions[index] && collisions[index].layer == this.layer) {
+					return collisions[index];
+				}
+			}
 			return null;
 		}
 	}

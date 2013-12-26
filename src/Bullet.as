@@ -16,7 +16,6 @@ package {
 			name = "bullet";
 			type = "bullet";
 			spriteMap.add("normal", [0, 1], 20, true);
-			setHitbox(40, 15, -8, 0);
 			
 			this.addGraphic(spriteMap);
 		}
@@ -28,12 +27,12 @@ package {
 				spriteMap.scale = 0.5;
 				spriteMap.color = 0x0000AA;
 				spriteMap.tinting = 0.3;
-				setHitbox(20, 7.5, 4, 0);
+				setHitbox(20, 7.5, 0, 0);
 				
 			} else {
 				spriteMap.scale = 1;
 				spriteMap.tinting = 0;
-				setHitbox(40, 15, 8, 0);
+				setHitbox(40, 15, 0, 0);
 			}
 			this.x = weapon.x;
 			this.y = weapon.y;
@@ -50,9 +49,8 @@ package {
 		override public function update():void {
 			if (x > FP.width || x < 0 || y < 0 || y > FP.height) {
 				this.destroy();
-				return;
 			}
-
+			
 			x += speed * FP.elapsed;
 		}
 		

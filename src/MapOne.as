@@ -18,6 +18,7 @@ package {
 			add(new Ally(player, -1, -1));
 			add(new Ally(player, -1, 1));
 			add(new Ally(player, 1, 0));
+			add(new Enemy());
 		
 			
 		}

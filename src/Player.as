@@ -12,15 +12,12 @@ package {
 		[Embed(source = 'assets/player.png')] private const PLAYER:Class;
 		
 		private var spriteMap:Spritemap;
-		private var shoot:Sfx;
 		
 		private var speed:Number = 150;
 		private var hVelocity:Number = 0;
 		private var vVelocity:Number = 0;
 		
 		private var weapon:Weapon;
-		private var fireRate:Number = 0.1;
-		private var fireWait:Number = fireRate;
 		
 		private var tintTween:VarTween;
 		private var resetTintTween:VarTween;
@@ -116,8 +113,13 @@ package {
 		}
 		
 		public function collideOnLayer(type:String, x:Number, y:Number):Entity {
-			var entity:Entity = collide(type, x, y);
-			if (entity && entity.layer == this.layer) return entity;
+			var collisions:Array = [];
+			this.collideInto(type, x, y, collisions);
+			for (var index:String in collisions) {
+				if (collisions[index] && collisions[index].layer == this.layer) {
+					return collisions[index];
+				}
+			}
 			return null;
 		}
 	}
