@@ -5,7 +5,6 @@ package {
 	import net.flashpunk.FP;
 	import net.flashpunk.utils.Key;
 
-
 	public class Main extends Engine {
 		
 		public function Main() {
@@ -14,6 +13,7 @@ package {
 			FP.screen.color = 0x000000;
 			FP.console.enable();
 			FP.console.toggleKey = Key.NUMPAD_0;
+			FP.volume = 0.3;
 		}
 
 		override public function init():void {

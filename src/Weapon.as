@@ -27,6 +27,8 @@ package {
 		}
 		
 		public function init(owner:Entity, relativeX:Number, relativeY:Number):Weapon {
+			//init() -> added()
+			//set arguments seperately like fire conditions
 			this.owner = owner;
 			this.layer = owner.layer;
 			this.relativeX = relativeX;
@@ -70,7 +72,7 @@ package {
 					fireWait -= fireRate;
 					this.fire();					
 				}	
-			} else if (this.releaseTrigger()) {
+			} else if (this.releaseTrigger == null || this.releaseTrigger()) {
 				fireWait = fireRate;
 			}
 		}

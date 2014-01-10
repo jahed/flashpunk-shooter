@@ -42,7 +42,6 @@ package {
 		}
 		
 		public function isOwner(entity:Entity):Boolean {
-			Debug.timeTrace(""+weapon);
 			return weapon != null && (weapon == entity || weapon.isOwner(entity));
 		}
 		

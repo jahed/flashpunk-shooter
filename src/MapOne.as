@@ -14,19 +14,17 @@ package {
 			super.begin();
 		
 			var player:Player = new Player()
+			
 			add(player);
 			add(new Ally(player, -1, -1));
 			add(new Ally(player, -1, 1));
 			add(new Ally(player, 1, 0));
-			add(new Enemy());
-		
-			
+			add(new Enemy(100));
+			add(new Enemy(200));
 		}
 		
 		override public function end():void {
 			super.end();
 		}
 	}
-	
-
 }
