@@ -1,4 +1,4 @@
-package {
+package io.jahed.shooter {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
@@ -6,7 +6,7 @@ package {
 	import net.flashpunk.tweens.misc.VarTween;
 
 	public class Weapon extends Entity {
-		[Embed(source="assets/shoot.mp3")] private const SHOOT:Class;
+		[Embed(source="/assets/shoot.mp3")] private const SHOOT:Class;
 		private var shoot:Sfx;
 		
 		protected var owner:Entity;

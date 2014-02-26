@@ -1,4 +1,4 @@
-package {
+package io.jahed.shooter {
 	import flash.display.StageScaleMode;
 	import net.flashpunk.debug.Console;
 	import net.flashpunk.Engine;

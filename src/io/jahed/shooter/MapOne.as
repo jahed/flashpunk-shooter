@@ -1,4 +1,4 @@
-package {
+package io.jahed.shooter {
 	import net.flashpunk.debug.Console;
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;

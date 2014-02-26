@@ -1,4 +1,4 @@
-package {
+package io.jahed.shooter {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Sfx;
@@ -10,7 +10,7 @@ package {
 	import net.flashpunk.graphics.Spritemap;
 
 	public class Enemy extends Entity {
-		[Embed(source = 'assets/enemy.png')] private const ENEMY:Class;
+		[Embed(source = '/assets/enemy.png')] private const ENEMY:Class;
 		
 		private var spriteMap:Spritemap;
 		private var shoot:Sfx;

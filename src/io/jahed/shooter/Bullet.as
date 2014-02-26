@@ -1,10 +1,10 @@
-package {
+package io.jahed.shooter {
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.graphics.Spritemap;
 
 	public class Bullet extends Entity {
-		[Embed(source = 'assets/bullet.png')] private static const BULLET:Class;
+		[Embed(source = '/assets/bullet.png')] private static const BULLET:Class;
 
 		private var spriteMap:Spritemap = new Spritemap(BULLET, 48, 16);
 
